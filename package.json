@@ -1,0 +1,14 @@
+{
+  "name": "snmpjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "author": "Mario A. Santini",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^3.5.3"
+  }
+}
