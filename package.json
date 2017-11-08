@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha -w",
-    "coverage": "nyc mocha"
+    "test": "mocha -w",
+    "coverage": "nyc mocha",
+    "coverage-html": "nyc --reporter=lcov --reporter=text-lcov mocha"
   },
   "author": "Mario A. Santini",
   "license": "ISC",
