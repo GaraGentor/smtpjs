@@ -18,9 +18,9 @@ describe('come utente devo potermi autenticare con nome utente e password',
   })
 
   it('dovrebbe accettare utente e password', () => {
-    const isAutnenticated = authentication
+    const isAuthenticated = authentication
       .authenticate("mario@socraten.com", "miapass");
-    assert.equal(isAutnenticated, true);
+    assert.equal(isAuthenticated, true);
   })
 
   it('con utente o password errati, ritorna false', () => {
