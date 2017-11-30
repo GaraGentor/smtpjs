@@ -1,5 +1,6 @@
 const assert = require('assert');
 const makeSmtp = require('../smtp');
+const registry = require('../registry');
 
 const authenticatedUser = {
     username: 'io@me.com',
@@ -30,10 +31,34 @@ describe('vorrei ricevere un errore se, come utente autenticato, provo a mandare
 
         assert.notEqual(smtp, null, "deve creare l'oggetto smtp");
 
+        const result = smtp.sendMail(authenticatedUser.username, 'test', 'test test');
+
         assert.equal(
-            smtp.sendMail(authenticatedUser.username, 'test', 'test test'),
+            result.ok,
             true,
             'dovrebbe concudersi correttamente'
         );
+    })
+
+    it('se mando un messaggio ad un indirizzo non presente deve restituirmi un errore', 
+    () => {
+        const smtp = makeSmtp(authenticate, authenticatedUser,
+            registry.exists);
+
+        assert.notEqual(smtp, null, "deve creare l'oggetto smtp");
+        
+        const result = smtp.sendMail('altra@mail.it', 'test', 'test test');
+
+        assert.equal(
+            result.ok,
+            false,
+            'dovrebbe restituire un errore'
+        );
+
+        assert.equal(
+            result.error,
+            'destination not found',
+            'dovrebbe restituire "destination not found", invece ' + result.error
+        )
     })
 });

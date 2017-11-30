@@ -1,5 +1,10 @@
 'use strict'
 
+const MakeResult = (success, error) => ({
+    "ok": success,
+    "error": error
+});
+
 exports = module.exports = function (
         authentication, 
         account, 
@@ -12,9 +17,10 @@ exports = module.exports = function (
     return {
         sendMail: function(destination, subject, message) {
             if (!validDestination(destination)) {
-                return false;
+                return MakeResult(false, "destination not found");
             }
-            return true;
+
+            return MakeResult(true);
         }
     };
 }
